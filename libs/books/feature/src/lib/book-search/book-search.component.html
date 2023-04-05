@@ -15,7 +15,7 @@
 
 <ng-container *ngIf="searchTerm; else empty">
   <div class="book-grid">
-    <div class="book" data-testing="book-item" *ngFor="let b of books">
+    <div class="book" data-testing="book-item" *ngFor="let b of (books$|async)">
       <div class="book--title">
         {{ b.title }}
       </div>
@@ -29,7 +29,7 @@
           <div>
             <strong>Published:</strong> {{ (b.publishedDate)|date:'M/d/yyyy'}}
           </div>
-          <p [innerHTML]="b.description"></p>
+          {{b.description}}
           <div>
             <button
               mat-flat-button class="mat-hover"
