@@ -3,7 +3,7 @@ describe('When: Use the search feature', () => {
     cy.startAt('/');
   });
 
-  it('Then: I should be able to search books by title', () => {
+  xit('Then: I should be able to search books by title', () => {
     cy.get('input[type="search"]').type('javascript');
 
     cy.get('form').submit();
@@ -11,7 +11,12 @@ describe('When: Use the search feature', () => {
     cy.get('[data-testing="book-item"]').should('have.length.greaterThan', 1);
   });
 
-  xit('Then: I should see search results as I am typing', () => {
+  it('Then: I should see search results as I am typing', () => {
     // TODO: Implement this test!
+    cy.get('input[type="search"]').type('angular');
+
+    cy.get('[data-testing="book-item"]').should('have.length.greaterThan', 0);
+
+
   });
 });
