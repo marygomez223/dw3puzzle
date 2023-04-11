@@ -19,12 +19,13 @@ import { Subject } from 'rxjs';
 })
 export class BookSearchComponent implements OnInit, OnDestroy {
   books: ReadingListBook[];
+
   books$ =this.store.select(getAllBooks);
   searchForm = this.fb.group({
     term: ''
   });
 
-  UnSubcsribeSubject$:Subject<void>=new Subject();
+  UnSubscribeSubject$:Subject<void>=new Subject();
 
   constructor(
     private readonly store: Store,
@@ -39,18 +40,14 @@ export class BookSearchComponent implements OnInit, OnDestroy {
      this.searchForm.controls['term'].valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      takeUntil(this.UnSubcsribeSubject$))
-      .subscribe((searchTerm) =>{
-      if (searchTerm) {
-        this.store.dispatch(searchBooks({ term:searchTerm }));
-      } else {
-        this.store.dispatch(clearSearch());
-      }
-      });
+      takeUntil(this.UnSubscribeSubject$))
+      .subscribe(() =>this.searchBooks(),
+      err =>console.error(err,'Something went wrong')
+      );
   }
   ngOnDestroy(): void {
-    this.UnSubcsribeSubject$.next();
-    this.UnSubcsribeSubject$.complete();
+    this.UnSubscribeSubject$.next();
+    this.UnSubscribeSubject$.complete();
   }
 
   // formatDate(date: void | string) {
@@ -65,14 +62,14 @@ export class BookSearchComponent implements OnInit, OnDestroy {
 
   searchExample() {
     this.searchForm.controls.term.setValue('javascript');
-    // this.searchBooks();
+    this.searchBooks();
   }
 
-  // searchBooks() {
-  //   if (this.searchForm.value.term) {
-  //     this.store.dispatch(searchBooks({ term: this.searchTerm }));
-  //   } else {
-  //     this.store.dispatch(clearSearch());
-  //   }
-  // }
+  searchBooks() {
+    if (this.searchForm.value.term) {
+      this.store.dispatch(searchBooks({ term: this.searchTerm }));
+    } else {
+      this.store.dispatch(clearSearch());
+    }
+  }
 }

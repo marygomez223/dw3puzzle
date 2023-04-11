@@ -29,7 +29,7 @@ describe('BookSearchComponent', () => {
     fixture = TestBed.createComponent(BookSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    jest.spyOn(store,'dispatch')
+    jest.spyOn(store,'dispatch');
   });
 
   it('should create', () => {
@@ -54,7 +54,7 @@ describe('BookSearchComponent', () => {
       searchBooks({term:'Algorithm'})
      );
     }));
-    it('should  not call searchBooks()  when received same input for search term',fakeAsync(()=>{
+    it('should  not call searchBooks() when received same input for search term',fakeAsync(()=>{
       component.searchForm.controls.term.setValue('Python');
  
       tick(500);
