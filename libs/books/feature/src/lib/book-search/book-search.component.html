@@ -27,7 +27,7 @@
           <div><strong>Author:</strong> {{ b.authors.join(',') }}</div>
           <div><strong>Publisher:</strong> {{ b.publisher }}</div>
           <div>
-            <strong>Published:</strong> {{ (b.publishedDate)|date:'M/d/yyyy'}}
+            <strong>Published:</strong> {{ (b.publishedDate)|date:'M/dd/yyyy':'en-US'}}
           </div>
           {{b.description}}
           <div>
