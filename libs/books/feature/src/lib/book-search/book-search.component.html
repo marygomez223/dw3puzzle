@@ -32,12 +32,13 @@
           {{b.description}}
           <div>
             <button
-              mat-flat-button class="mat-hover"
+              mat-flat-button
               color="primary"
               (click)="addBookToReadingList(b)"
               [disabled]="b.isAdded"
+              data-testing="add-book-button"
             >
-              Want to Read
+              {{b.finished ? 'Finished':'Want to Read'}}
             </button>
           </div>
         </div>
