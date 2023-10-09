@@ -18,27 +18,27 @@
 
 <ng-container *ngIf="searchTerm; else empty">
   <div class="book-grid">
-    <div class="book" data-testing="book-item" *ngFor="let b of (books$|async)">
+    <div class="book" data-testing="book-item" *ngFor="let book of (books$|async)">
       <div class="book--title">
-        {{ b.title }}
+        {{ book.title }}
       </div>
       <div class="book--content">
         <div class="book--content--cover">
-          <img src="{{ b.coverUrl }}" alt="coverpage" />
+          <img src="{{ book.coverUrl }}" alt="cover page" />
         </div>
         <div class="book--content--info">
-          <div><strong>Author:</strong> {{ b.authors.join(',') }}</div>
-          <div><strong>Publisher:</strong> {{ b.publisher }}</div>
+          <div><strong>Author:</strong> {{ book.authors.join(',') }}</div>
+          <div><strong>Publisher:</strong> {{ book.publisher }}</div>
           <div>
-           <strong>Published:</strong> {{ (b.publishedDate)|date:'M/dd/yyyy':'en-US'}}
+            <strong>Published:</strong> {{ (book.publishedDate)|date:'M/dd/yyyy':'en-US'}}
           </div>
-          {{b.description}}
+          {{book.description}}
           <div>
             <button
               mat-flat-button
               color="primary"
-              (click)="addBookToReadingList(b)"
-              [disabled]="b.isAdded"
+              (click)="addBookToReadingList(book)"
+              [disabled]="book.isAdded"
             >
               Want to Read
             </button>

@@ -1,31 +1,31 @@
-import { Component,OnDestroy,OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   addToReadingList,
   clearSearch,
   getAllBooks,
   ReadingListBook,
-  searchBooks
+  searchBooks,
 } from '@tmo/books/data-access';
 import { FormBuilder } from '@angular/forms';
 import { Book } from '@tmo/shared/models';
-import{debounceTime,distinctUntilChanged,takeUntil} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
   selector: 'tmo-book-search',
   templateUrl: './book-search.component.html',
-  styleUrls: ['./book-search.component.scss']
+  styleUrls: ['./book-search.component.scss'],
 })
 export class BookSearchComponent implements OnInit, OnDestroy {
   books: ReadingListBook[];
 
-  books$ =this.store.select(getAllBooks);
+  books$ = this.store.select(getAllBooks);
   searchForm = this.fb.group({
-    term: ''
+    term: '',
   });
 
-  UnSubscribeSubject$:Subject<void>=new Subject();
+  UnSubscribe$: Subject<void> = new Subject();
 
   constructor(
     private readonly store: Store,
@@ -37,24 +37,21 @@ export class BookSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-     this.searchForm.controls['term'].valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      takeUntil(this.UnSubscribeSubject$))
-      .subscribe(() =>this.searchBooks(),
-      err =>console.error(err,'Something went wrong')
+    this.searchForm.controls['term'].valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        takeUntil(this.UnSubscribe$)
+      )
+      .subscribe(
+        () => this.searchBooks(),
+        (err) => console.error(err, 'Something went wrong')
       );
   }
   ngOnDestroy(): void {
-    this.UnSubscribeSubject$.next();
-    this.UnSubscribeSubject$.complete();
+    this.UnSubscribe$.next();
+    this.UnSubscribe$.complete();
   }
-
-  // formatDate(date: void | string) {
-  //   return date
-  //     ? new Intl.DateTimeFormat('en-US').format(new Date(date))
-  //     : undefined;
-  // }
 
   addBookToReadingList(book: Book) {
     this.store.dispatch(addToReadingList({ book }));
