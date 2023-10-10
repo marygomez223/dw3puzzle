@@ -30,19 +30,6 @@ export class BookSearchComponent {
   get searchTerm(): string {
     return this.searchForm.value.term;
   }
-
-  // ngOnInit(): void {
-  //   this.store.select(getAllBooks).subscribe(books => {
-  //     this.books = books;
-  //   });
-  // }
-
-  // formatDate(date: void | string) {
-  //   return date
-  //     ? new Intl.DateTimeFormat('en-US').format(new Date(date))
-  //     : undefined;
-  // }
-
   addBookToReadingList(book: Book) {
     this.store.dispatch(addToReadingList({ book: { ...book, isOpenSnackBar: true } }));
   }
