@@ -1,4 +1,4 @@
-<form [formGroup]="searchForm" (ngSubmit)="searchBooks()">
+<form [formGroup]="searchForm">
   <mat-form-field floatLabel="never">
     <input
       autoFocus
@@ -7,9 +7,12 @@
       placeholder="Search for books to add to your reading list"
       formControlName="term"
     />
-    <button mat-icon-button matSuffix aria-label="search">
-      <mat-icon>search</mat-icon>
-    </button>
+    <!-- <button 
+    mat-icon-button 
+    matSuffix 
+    aria-label="search">
+    <mat-icon>search</mat-icon>
+    </button> -->
   </mat-form-field>
 </form>
 
@@ -32,7 +35,7 @@
           {{book.description}}
           <div>
             <button
-              mat-flat-button class="mat-hover"
+              mat-flat-button
               color="primary"
               (click)="addBookToReadingList(book)"
               [disabled]="book.isAdded"
