@@ -33,6 +33,7 @@
           <div>
             <button
               mat-flat-button class="mat-hover"
+              data-testing="add-item"
               color="primary"
               (click)="addBookToReadingList(book)"
               [disabled]="book.isAdded"
