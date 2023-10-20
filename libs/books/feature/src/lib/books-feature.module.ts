@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BooksDataAccessModule } from '@tmo/books/data-access';
 import { BookSearchComponent } from './book-search/book-search.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,7 +26,6 @@ const EXPORTS = [
     MatIconModule,
     MatInputModule,
     MatSnackBarModule,
-    FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: BookSearchComponent }

@@ -7,7 +7,7 @@
       placeholder="Search for books to add to your reading list"
       formControlName="term"
     />
-    <button mat-icon-button matSuffix aria-label="search">
+    <button mat-icon-button matSuffix aria-label="search books">
       <mat-icon>search</mat-icon>
     </button>
   </mat-form-field>
@@ -27,13 +27,14 @@
           <div><strong>Author:</strong> {{ book.authors.join(',') }}</div>
           <div><strong>Publisher:</strong> {{ book.publisher }}</div>
           <div>
-            <strong>Published:</strong> {{ (book.publishedDate)|date:'M/dd/yyyy':'en-US'}}
+            <strong>Published:</strong> {{ (book.publishedDate)|date:'MM/dd/yyyy':'en-US'}}
           </div>
           {{book.description}}
           <div>
             <button
               mat-flat-button class="mat-hover"
               color="primary"
+              aria-label="adding books to reading list"
               (click)="addBookToReadingList(book)"
               [disabled]="book.isAdded"
             >
