@@ -1,8 +1,5 @@
+import { booksAdapter,initialState as booksInitialState } from '../book-search/books.reducer';
 import { initialState, readingListAdapter } from './reading-list.reducer';
-import {
-  booksAdapter,
-  initialState as booksInitialState
-} from './books.reducer';
 import * as ToReadSelectors from './reading-list.selectors';
 import { createBook, createReadingListItem } from '@tmo/shared/testing';
 

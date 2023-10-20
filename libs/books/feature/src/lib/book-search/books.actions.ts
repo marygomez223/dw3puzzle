@@ -16,4 +16,5 @@ export const searchBooksFailure = createAction(
   props<{ error: any }>()
 );
 
-export const clearSearch = createAction('[Books Search Bar] Clear Search');
+export const clearSearch = createAction(
+  '[Books Search Bar] Clear Search');

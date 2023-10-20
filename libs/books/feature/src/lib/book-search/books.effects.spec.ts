@@ -1,45 +1,45 @@
 import { TestBed } from '@angular/core/testing';
-import { ReplaySubject } from 'rxjs';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
+import { ReplaySubject } from 'rxjs';
+import { createBook, SharedTestingModule } from '@tmo/shared/testing';
+import { BooksEffects } from './books.effects';
+import * as BooksActions from './books.actions';
 import { HttpTestingController } from '@angular/common/http/testing';
+import { Constant } from '@tmo/shared/models';
 
-import { SharedTestingModule } from '@tmo/shared/testing';
-import { ReadingListEffects } from './reading-list.effects';
-import * as ReadingListActions from './reading-list.actions';
-
-describe('ToReadEffects', () => {
+describe('BooksEffects', () => {
   let actions: ReplaySubject<any>;
-  let effects: ReadingListEffects;
+  let effects: BooksEffects;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [SharedTestingModule],
       providers: [
-        ReadingListEffects,
+        BooksEffects,
         provideMockActions(() => actions),
         provideMockStore()
       ]
     });
 
-    effects = TestBed.inject(ReadingListEffects);
+    effects = TestBed.inject(BooksEffects);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
-  describe('loadReadingList$', () => {
+  describe('SearchBooks$', () => {
     it('should work', done => {
       actions = new ReplaySubject();
-      actions.next(ReadingListActions.init());
+      actions.next(BooksActions.searchBooks({ term: '' }));
 
-      effects.loadReadingList$.subscribe(action => {
+      effects.searchBooks$.subscribe(action => {
         expect(action).toEqual(
-          ReadingListActions.loadReadingListSuccess({ list: [] })
+          BooksActions.searchBooksSuccess({ books: [createBook('A')] })
         );
         done();
       });
 
-      httpMock.expectOne('/api/reading-list').flush([]);
+      httpMock.expectOne(`${Constant.BOOKS_SEARCH_API}`).flush([createBook('A')]);
     });
   });
 });

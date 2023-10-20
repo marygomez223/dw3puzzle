@@ -26,16 +26,5 @@ describe('Books Selectors', () => {
       expect(results.map(x => x.id)).toEqual(['A', 'B', 'C']);
     });
 
-    it("getBooksLoaded() should return the current 'loaded' status", () => {
-      const result = BooksSelectors.getBooksLoaded(state);
-
-      expect(result).toBe(true);
-    });
-
-    it("getBooksError() should return the current 'error' state", () => {
-      const result = BooksSelectors.getBooksError(state);
-
-      expect(result).toEqual('Unknown error');
-    });
-  });
+     });
 });

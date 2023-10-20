@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { BooksPartialState } from './books.reducer';
-import { getBooks } from './books.selectors';
+import { BooksPartialState } from '../book-search/books.reducer';
+import { getBooks } from '../book-search/books.selectors';
 import {
   READING_LIST_FEATURE_KEY,
   readingListAdapter,
