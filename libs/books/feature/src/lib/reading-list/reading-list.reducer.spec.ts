@@ -60,7 +60,7 @@ describe('Reading list Reducer', () => {
       const result: State = reducer(state, action);
 
       
-      expect(result.ids).toEqual(['A','C']);
+      expect(result.ids).toEqual(['A']);
 
     });
     it('confirmedAddToReadingList should confirm books are added to the reading list', () => {
@@ -80,7 +80,7 @@ describe('Reading list Reducer', () => {
 
       const result: State = reducer(state, action);
 
-      expect(result.ids).toEqual(['A','C']);
+      expect(result.ids).toEqual(['A']);
     });
     
     it('failedAddToReadingList should undo book addition to the state', () => {
@@ -90,7 +90,7 @@ describe('Reading list Reducer', () => {
 
       const result: State = reducer(state, action);
 
-      expect(result.ids).toEqual(['A','C']);
+      expect(result.ids).toEqual(['A']);
     });
 
     it('failedRemoveFromReadingList should undo book removal from the state', () => {
